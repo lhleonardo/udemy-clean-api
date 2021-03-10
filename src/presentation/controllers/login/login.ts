@@ -14,7 +14,7 @@ export class LoginController implements Controller {
     try {
       const { email, password } = httpRequest.body
       if (!email) {
-        return new Promise(resolve => resolve(badRequest(new MissingParamError('email'))))
+        return await new Promise(resolve => resolve(badRequest(new MissingParamError('email'))))
       }
       if (!password) {
         return new Promise(resolve => resolve(badRequest(new MissingParamError('password'))))
