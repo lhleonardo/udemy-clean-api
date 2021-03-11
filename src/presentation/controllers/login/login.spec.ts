@@ -1,6 +1,6 @@
 import { Authentication } from '../../../domain/usecases/authentication'
 import { InvalidParamError } from '../../errors'
-import { badRequest } from '../../helpers/http-helper'
+import { badRequest, ok } from '../../helpers/http-helper'
 import { EmailValidation } from '../../helpers/validators/email-validation'
 import { RequiredFieldValidation } from '../../helpers/validators/required-field-validation'
 import { ValidationComposite } from '../../helpers/validators/validation-composite'
@@ -18,7 +18,7 @@ const makeFakeRequest = (): HttpRequest => ({
 const makeAuthenticationStub = (): Authentication => {
   class AuthenticationStub implements Authentication {
     async auth (email: string, password: string): Promise<string> {
-      return await new Promise(resolve => resolve('any_token'))
+      return await new Promise(resolve => resolve('valid_token'))
     }
   }
 
@@ -83,5 +83,13 @@ describe('Login Controller', () => {
     await sut.handle(makeFakeRequest())
 
     expect(authSpy).toHaveBeenCalledWith('any_email@mail.com', 'any_password')
+  })
+
+  test('Should return valid token if authentication succeeds', async () => {
+    const { sut } = makeSut()
+
+    const httpResponse = await sut.handle(makeFakeRequest())
+
+    expect(httpResponse).toEqual(ok('valid_token'))
   })
 })
