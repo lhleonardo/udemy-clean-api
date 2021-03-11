@@ -1,6 +1,6 @@
 import { Authentication } from '../../../domain/usecases/authentication'
 import { InvalidParamError } from '../../errors'
-import { badRequest, ok, serverError, unauthorized } from '../../helpers/http-helper'
+import { badRequest, ok, serverError, unauthorized } from '../../helpers/http/http-helper'
 import { EmailValidation } from '../../helpers/validators/email-validation'
 import { RequiredFieldValidation } from '../../helpers/validators/required-field-validation'
 import { ValidationComposite } from '../../helpers/validators/validation-composite'
