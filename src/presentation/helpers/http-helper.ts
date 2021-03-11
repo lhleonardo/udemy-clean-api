@@ -15,3 +15,7 @@ export const ok = (data: any): HttpResponse => ({
   statusCode: 200,
   body: data
 })
+export const unauthorized = (): HttpResponse => ({
+  statusCode: 401,
+  body: null
+})
