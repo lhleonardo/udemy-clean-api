@@ -100,7 +100,7 @@ describe('Login Controller', () => {
 
     const httpResponse = await sut.handle(makeFakeRequest())
 
-    expect(httpResponse).toEqual(ok('valid_token'))
+    expect(httpResponse).toEqual(ok({ accessToken: 'valid_token' }))
   })
 
   test('Should return 500 if Authentication throws', async () => {
