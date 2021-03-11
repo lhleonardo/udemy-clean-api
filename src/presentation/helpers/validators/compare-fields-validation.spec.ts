@@ -19,4 +19,12 @@ describe('CompareFields Validation', () => {
     const validationResponse = sut.validate({ any_source: 'value', any_target: 'different_value' })
     expect(validationResponse).toEqual(new InvalidParamError('any_target'))
   })
+
+  test('Should not return if validation succeeds', () => {
+    const { sut } = makeSut()
+
+    const validationResult = sut.validate({ any_source: 'any_value', any_target: 'any_value' })
+
+    expect(validationResult).toBeFalsy()
+  })
 })

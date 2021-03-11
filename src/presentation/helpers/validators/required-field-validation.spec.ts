@@ -19,4 +19,12 @@ describe('CompareFields Validation', () => {
     const validationResponse = sut.validate({})
     expect(validationResponse).toEqual(new MissingParamError('any_field'))
   })
+
+  test('Should not return if validation succeeds', () => {
+    const { sut } = makeSut()
+
+    const validationResult = sut.validate({ any_field: 'any_value' })
+
+    expect(validationResult).toBeFalsy()
+  })
 })
