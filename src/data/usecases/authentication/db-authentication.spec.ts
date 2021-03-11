@@ -1,7 +1,6 @@
-import { LoadAccountByEmailRepository } from './db-authentication-protocols'
+import { LoadAccountByEmailRepository, AuthenticationModel } from './db-authentication-protocols'
 import { AccountModel } from '../add-account/db-add-account-protocols'
 import { DbAuthentication } from './db-authentication'
-import { AuthenticationModel } from '../../../domain/usecases/authentication'
 
 const makeLoadAccountByEmailStub = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
