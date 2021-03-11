@@ -29,7 +29,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('CompareFields Validation', () => {
+describe('Validation Composite', () => {
   test('Should return error if some validation fails', () => {
     const { sut } = makeSut()
 
