@@ -13,7 +13,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('CompareFields Validation', () => {
+describe('RequiredFields Validation', () => {
   test('Should return InvalidParamError when validation fails', () => {
     const { sut } = makeSut()
     const validationResponse = sut.validate({})
