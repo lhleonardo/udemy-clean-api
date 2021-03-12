@@ -62,6 +62,6 @@ describe('DbAuthentication UseCase', () => {
 
     const accessToken = await sut.auth(makeFakeCredentials())
 
-    expect(accessToken).toBe(null)
+    expect(accessToken).toBeNull()
   })
 })
