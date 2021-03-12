@@ -1,12 +1,14 @@
-import { LoadAccountByEmailRepository, Authentication, AuthenticationModel, HashComparer } from './db-authentication-protocols'
+import { LoadAccountByEmailRepository, Authentication, AuthenticationModel, HashComparer, TokenGenerator } from './db-authentication-protocols'
 
 export class DbAuthentication implements Authentication {
   private readonly loadAccountByEmail: LoadAccountByEmailRepository
   private readonly hashComparer: HashComparer
+  private readonly tokenGenerator: TokenGenerator
 
-  constructor (hashComparer: HashComparer, loadAccountByEmail: LoadAccountByEmailRepository) {
+  constructor (hashComparer: HashComparer, loadAccountByEmail: LoadAccountByEmailRepository, tokenGenerator: TokenGenerator) {
     this.hashComparer = hashComparer
     this.loadAccountByEmail = loadAccountByEmail
+    this.tokenGenerator = tokenGenerator
   }
 
   async auth (credentials: AuthenticationModel): Promise<string> {
@@ -16,7 +18,7 @@ export class DbAuthentication implements Authentication {
       const compareResult = await this.hashComparer.compare(credentials.password, user.password)
 
       if (compareResult) {
-        return 'valid_token'
+        await this.tokenGenerator.generate(user.id)
       }
     }
 
