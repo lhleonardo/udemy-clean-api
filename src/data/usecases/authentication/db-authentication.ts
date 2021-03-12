@@ -1,9 +1,11 @@
-import { LoadAccountByEmailRepository, Authentication, AuthenticationModel } from './db-authentication-protocols'
+import { LoadAccountByEmailRepository, Authentication, AuthenticationModel, HashComparer } from './db-authentication-protocols'
 
 export class DbAuthentication implements Authentication {
   private readonly loadAccountByEmail: LoadAccountByEmailRepository
+  private readonly hashComparer: HashComparer
 
-  constructor (loadAccountByEmail: LoadAccountByEmailRepository) {
+  constructor (hashComparer: HashComparer, loadAccountByEmail: LoadAccountByEmailRepository) {
+    this.hashComparer = hashComparer
     this.loadAccountByEmail = loadAccountByEmail
   }
 
@@ -13,5 +15,7 @@ export class DbAuthentication implements Authentication {
     if (!user) {
       return null
     }
+
+    await this.hashComparer.compare(credentials.password, user.password)
   }
 }
