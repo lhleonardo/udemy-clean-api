@@ -1,4 +1,11 @@
-import { Authentication, AuthenticationModel, HashComparer, LoadAccountByEmailRepository, Encrypter, UpdateAccessTokenRepository } from './db-authentication-protocols'
+import {
+  Authentication,
+  AuthenticationModel,
+  HashComparer,
+  LoadAccountByEmailRepository,
+  Encrypter,
+  UpdateAccessTokenRepository
+} from './db-authentication-protocols'
 
 export class DbAuthentication implements Authentication {
   private readonly loadAccountByEmail: LoadAccountByEmailRepository
@@ -6,7 +13,12 @@ export class DbAuthentication implements Authentication {
   private readonly tokenGenerator: Encrypter
   private readonly updateAccessTokenRepository: UpdateAccessTokenRepository
 
-  constructor (hashComparer: HashComparer, loadAccountByEmail: LoadAccountByEmailRepository, tokenGenerator: Encrypter, updateAccessTokenRepository: UpdateAccessTokenRepository) {
+  constructor (
+    hashComparer: HashComparer,
+    loadAccountByEmail: LoadAccountByEmailRepository,
+    tokenGenerator: Encrypter,
+    updateAccessTokenRepository: UpdateAccessTokenRepository
+  ) {
     this.hashComparer = hashComparer
     this.loadAccountByEmail = loadAccountByEmail
     this.tokenGenerator = tokenGenerator
